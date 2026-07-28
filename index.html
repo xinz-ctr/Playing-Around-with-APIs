@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder | Find Your Next Opportunity</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>JobFinder</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#results">Jobs</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <h1>Find Your Dream Job</h1>
+        <p>
+            Search thousands of job opportunities from Google Jobs
+            in one place.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="jobTitle"
+                placeholder="Job title (e.g. Software Engineer)"
+            >
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Location (e.g. Kigali, Rwanda)"
+            >
+
+            <button id="searchBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </div>
+    </section>
+
+    <!-- ================= FILTERS ================= -->
+    <section class="controls">
+
+        <div class="filter-group">
+
+            <label>
+                <input type="checkbox" id="remoteFilter">
+                Remote Only
+            </label>
+
+            <label>
+                <input type="checkbox" id="fullTimeFilter">
+                Full-Time
+            </label>
+
+            <label>
+                <input type="checkbox" id="internshipFilter">
+                Internship
+            </label>
+
+        </div>
+
+        <div class="sort-group">
+
+            <label for="sortSelect">Sort By:</label>
+
+            <select id="sortSelect">
+                <option value="newest">Newest</option>
+                <option value="company">Company</option>
+                <option value="title">Job Title</option>
+            </select>
+
+        </div>
+
+    </section>
+
+    <!-- ================= LOADING ================= -->
+    <div id="loading" class="loading hidden">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        <p>Searching jobs...</p>
+    </div>
+    <div id="resultCount" class="result-count"></div>
+
+    <div class="action-buttons">
+        <button id="clearBtn">Clear Results</button>
+    </div>
+
+    <main>
+        <section id="results" class="results">
+
+        </section>
+    </main>
+
+
+    <!-- ================= RESULTS ================= -->
+    <main>
+
+        <section id="results" class="results">
+
+            <!-- Job cards will appear here -->
+
+        </section>
+
+    </main>
+
+    
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <p>
+            © 2026 JobFinder |
+            Powered by SerpAPI Google Jobs
+        </p>
+
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
