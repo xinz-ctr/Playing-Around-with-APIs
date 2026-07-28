@@ -61,10 +61,9 @@ async function fetchJobs() {
     resultsContainer.innerHTML = "";
 
     try {
-
-        const url = `https://serpapi.com/search.json?engine=google_jobs&q=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&api_key=${API_KEY}`;
-
-        const response = await fetch(url);
+        const response = await fetch(
+            `/api/jobs?q=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}`
+        );
 
         if (!response.ok) {
             throw new Error("Failed to fetch jobs.");
