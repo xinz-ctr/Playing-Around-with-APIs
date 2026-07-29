@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder | Find Jobs Worldwide</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>JobFinder</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#results">Jobs</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>Find Your Dream Job</h1>
+
+        <p>
+            Search thousands of remote and international jobs
+            from companies around the world.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="jobTitle"
+                placeholder="Job title (Software Engineer, Designer...)"
+            >
+
+            <input
+                type="text"
+                id="country"
+                placeholder="Country (Rwanda, Kenya, Canada...)"
+            >
+
+            <button id="searchBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FILTERS ================= -->
+
+    <section class="controls">
+
+        <div class="filter-group">
+
+            <select id="employmentType">
+
+                <option value="">Employment Type</option>
+
+                <option value="full-time">
+                    Full Time
+                </option>
+
+                <option value="part-time">
+                    Part Time
+                </option>
+
+                <option value="contract">
+                    Contract
+                </option>
+
+                <option value="internship">
+                    Internship
+                </option>
+
+            </select>
+
+            <select id="seniority">
+
+                <option value="">Experience Level</option>
+
+                <option value="intern">
+                    Intern
+                </option>
+
+                <option value="junior">
+                    Junior
+                </option>
+
+                <option value="mid">
+                    Mid Level
+                </option>
+
+                <option value="senior">
+                    Senior
+                </option>
+
+                <option value="lead">
+                    Lead
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="sort-group">
+
+            <label for="sortBy">
+                Sort By
+            </label>
+
+            <select id="sortBy">
+
+                <option value="relevance">
+                    Most Relevant
+                </option>
+
+                <option value="recent">
+                    Most Recent
+                </option>
+
+                <option value="salary_high">
+                    Highest Salary
+                </option>
+
+                <option value="salary_low">
+                    Lowest Salary
+                </option>
+
+                <option value="company">
+                    Company Name
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+    <!-- ================= LOADING ================= -->
+
+    <div id="loading" class="loading hidden">
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <p>Searching jobs...</p>
+
+    </div>
+
+    <!-- ================= RESULT INFO ================= -->
+
+    <div id="resultCount" class="result-count"></div>
+
+    <div class="action-buttons">
+
+        <button id="clearBtn">
+            Clear Results
+        </button>
+
+    </div>
+
+    <!-- ================= JOB RESULTS ================= -->
+
+    <main>
+
+        <section
+            id="results"
+            class="results">
+
+        </section>
+
+    </main>
+
+    <!-- ================= PAGINATION ================= -->
+
+    <section class="pagination">
+
+        <button id="prevPage">
+            <i class="fa-solid fa-angle-left"></i>
+            Previous
+        </button>
+
+        <span id="pageNumber">
+            Page 1
+        </span>
+
+        <button id="nextPage">
+            Next
+            <i class="fa-solid fa-angle-right"></i>
+        </button>
+
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about" class="about">
+
+        <h2>About JobFinder</h2>
+
+        <p>
+
+            JobFinder helps users discover job opportunities from
+            companies around the world using the free Himalayas Jobs API.
+
+            Search jobs, filter opportunities, sort results,
+            and explore careers in one simple application.
+
+        </p>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 JobFinder
+
+            <br>
+
+            Powered by the Himalayas Jobs API
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

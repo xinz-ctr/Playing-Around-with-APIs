@@ -1,0 +1,576 @@
+/* =======================
+   GOOGLE FONT
+======================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#333;
+    line-height:1.6;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+
+header{
+    background:#0d6efd;
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:18px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+.logo i{
+    font-size:1.7rem;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    opacity:.8;
+}
+
+/* =======================
+   HERO
+======================= */
+
+.hero{
+
+    text-align:center;
+    color:white;
+
+    padding:70px 20px;
+
+    background:linear-gradient(135deg,#0d6efd,#2d8cff);
+
+}
+
+.hero h1{
+
+    font-size:3rem;
+    margin-bottom:15px;
+
+}
+
+.hero p{
+
+    max-width:700px;
+    margin:auto;
+    margin-bottom:35px;
+
+    opacity:.95;
+
+}
+
+.search-box{
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+
+}
+
+.search-box input{
+
+    width:280px;
+
+    padding:14px;
+
+    border:none;
+    border-radius:8px;
+
+    font-size:15px;
+
+}
+
+.search-box button{
+
+    background:#ffc107;
+    color:#222;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.search-box button:hover{
+
+    background:#ffca2c;
+    transform:translateY(-2px);
+
+}
+
+/* =======================
+   FILTERS
+======================= */
+
+.controls{
+
+    max-width:1200px;
+    margin:30px auto;
+
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    padding:0 20px;
+
+}
+
+.filter-group,
+.sort-group{
+
+    display:flex;
+    gap:15px;
+    align-items:center;
+    flex-wrap:wrap;
+
+}
+
+select{
+
+    padding:10px 15px;
+
+    border-radius:6px;
+
+    border:1px solid #ccc;
+
+    cursor:pointer;
+
+}
+
+/* =======================
+   LOADING
+======================= */
+
+.loading{
+
+    text-align:center;
+    margin:30px;
+
+}
+
+.loading i{
+
+    font-size:2rem;
+    color:#0d6efd;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+/* =======================
+   RESULTS
+======================= */
+
+.result-count{
+
+    text-align:center;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.results{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:25px;
+
+    padding:20px;
+
+}
+
+/* =======================
+   JOB CARD
+======================= */
+
+.job-card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:22px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.job-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.job-header{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.job-header img{
+
+    width:65px;
+    height:65px;
+
+    border-radius:8px;
+
+    object-fit:contain;
+
+    background:#f3f3f3;
+
+}
+
+.job-header h3{
+
+    color:#0d6efd;
+
+    margin-bottom:5px;
+
+}
+
+.company{
+
+    color:#666;
+    font-size:.95rem;
+
+}
+
+.job-info{
+
+    margin:15px 0;
+
+}
+
+.job-info p{
+
+    margin:8px 0;
+
+}
+
+.job-description{
+
+    margin:15px 0;
+
+    color:#555;
+
+    font-size:.95rem;
+
+}
+
+.job-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:20px;
+
+}
+
+.job-footer span{
+
+    color:#777;
+
+    font-size:.9rem;
+
+}
+
+.job-footer a{
+
+    text-decoration:none;
+
+    background:#0d6efd;
+
+    color:white;
+
+    padding:10px 16px;
+
+    border-radius:6px;
+
+    transition:.3s;
+
+}
+
+.job-footer a:hover{
+
+    background:#0b5ed7;
+
+}
+
+/* =======================
+   ACTION BUTTONS
+======================= */
+
+.action-buttons{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.action-buttons button{
+
+    background:#dc3545;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.action-buttons button:hover{
+
+    background:#bb2d3b;
+
+}
+
+/* =======================
+   PAGINATION
+======================= */
+
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin:40px;
+
+}
+
+.pagination button{
+
+    background:#0d6efd;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.pagination button:hover{
+
+    background:#0b5ed7;
+
+}
+
+/* =======================
+   ABOUT
+======================= */
+
+.about{
+
+    max-width:900px;
+
+    margin:60px auto;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+.about h2{
+
+    color:#0d6efd;
+
+    margin-bottom:20px;
+
+}
+
+/* =======================
+   FOOTER
+======================= */
+
+footer{
+
+    background:#0d6efd;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    margin-top:40px;
+
+}
+
+/* =======================
+   MESSAGE
+======================= */
+
+.message{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+/* =======================
+   MOBILE
+======================= */
+
+@media(max-width:768px){
+
+.navbar{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.nav-links{
+
+    gap:15px;
+
+}
+
+.hero h1{
+
+    font-size:2.2rem;
+
+}
+
+.controls{
+
+    flex-direction:column;
+
+}
+
+.search-box{
+
+    flex-direction:column;
+    align-items:center;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    max-width:400px;
+
+}
+
+.search-box button{
+
+    width:100%;
+    max-width:400px;
+
+}
+
+.results{
+
+    grid-template-columns:1fr;
+
+}
+
+.pagination{
+
+    flex-wrap:wrap;
+
+}
+
+}
