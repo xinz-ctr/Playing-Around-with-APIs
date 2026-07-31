@@ -2,6 +2,8 @@
 
 The website is live on a secure domain [www.ianchris.tech](https://www.ianchris.tech/)
 
+[LINK TO THE DEMO VIDEO](https://drive.google.com/file/d/1mXKlubBtJgYZwKwm2SKkNyYyCrMhT5xs/view?usp=sharing)
+
 NOTE: I USED A PUBLIC API THAT DOES NOT REQUIRE AN API_KEY, HENCE WHY THERE IS NO API_KEY IN THIS README
 
 ## Project Overview
@@ -85,15 +87,14 @@ Playing-Around-with-APIs/
 
 Clone the repository
 
-```bash
+bash
 git clone https://github.com/xinz-ctr/Playing-Around-with-APIs.git
-```
+
 
 Go into the project folder
 
-```bash
+bash
 cd Playing-Around-with-APIs
-```
 
 Open the project using VS Code.
 
@@ -103,9 +104,7 @@ Right click **index.html**
 
 Select
 
-```
 Open with Live Server
-```
 
 The application will automatically open in your browser.
 
@@ -114,21 +113,17 @@ The application will automatically open in your browser.
 
 If you have Python installed
 
-```bash
+bash
 python -m http.server
-```
 
 or
 
-```bash
+bash
 python3 -m http.server
-```
 
 Open
 
-```
 http://localhost:8000
-```
 
 ---
 
@@ -140,50 +135,42 @@ The application was deployed on Ubuntu web servers running Nginx.
 
 Clone the repository
 
-```bash
+bash
 git clone https://github.com/xinz-ctr/Playing-Around-with-APIs.git
-```
 
 ## Step 2
 
 Copy the project files
 
-```bash
+bash
 sudo cp -r Playing-Around-with-APIs/* /var/www/html/
-```
 
 ## Step 3
 
 Set permissions
 
-```bash
+bash
 sudo chown -R www-data:www-data /var/www/html
-```
 
-```bash
+bash
 sudo chmod -R 755 /var/www/html
-```
 
 ## Step 4
 
 Restart Nginx
 
-```bash
+bash
 sudo systemctl restart nginx
-```
 
 Verify
 
-```bash
+bash
 sudo systemctl status nginx
-```
 
 Visit
 
-```
 http://13.222.212.192  for web01
 http://44.201.158.84  for web02
-```
 
 The application should now be accessible.
 
@@ -195,7 +182,6 @@ The application was deployed behind an HAProxy load balancer.
 
 Two web servers were configured as backend servers.
 
-```
 Web-01
 
 ↓
@@ -205,13 +191,12 @@ Web-02
 ↓
 
 Load Balancer
-```
 
 The HAProxy backend configuration pointed to both web servers.
 
 Example
 
-```haproxy
+haproxy
 backend web_servers
 
     balance roundrobin
@@ -219,7 +204,6 @@ backend web_servers
     server web01 13.222.212.192:80 check
 
     server web02 44.201.158.84:80 check
-```
 
 The **roundrobin** balancing algorithm distributes incoming requests evenly between the two web servers.
 
