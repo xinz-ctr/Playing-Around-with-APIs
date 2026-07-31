@@ -1,6 +1,6 @@
 # JobFinder - Remote Job Search Application
 
-The website is live on a secure domain [www.ianchris.tech](https://www.ianchris.tech/)
+The website is live on [www.ianchris.tech](https://www.ianchris.tech/)
 
 [LINK TO THE DEMO VIDEO](https://drive.google.com/file/d/1mXKlubBtJgYZwKwm2SKkNyYyCrMhT5xs/view?usp=sharing)
 
