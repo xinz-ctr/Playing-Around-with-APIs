@@ -1,6 +1,6 @@
 # JobFinder - Remote Job Search Application
 
-The website is live on a secure domain [ianchris.tech](https://www.ianchris.tech/)
+The website is live on a secure domain [www.ianchris.tech](https://www.ianchris.tech/)
 
 NOTE: I USED A PUBLIC API THAT DOES NOT REQUIRE AN API_KEY, HENCE WHY THERE IS NO API_KEY IN THIS README
 
@@ -32,9 +32,9 @@ The project was built using HTML, CSS and JavaScript without any frontend framew
 
 # Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript (ES6)
+- HTML
+- CSS
+- JavaScript
 - Remote OK API
 
 ---
