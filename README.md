@@ -47,15 +47,15 @@ The application retrieves remote job listings from the Remote OK public API.
 
 API Endpoint
 
-https://remoteok.com/api
+[https://remoteok.com/api](https://remoteok.com/api)
 
 Official Website
 
-https://remoteok.com
+[https://remoteok.com](https://remoteok.com)
 
 Documentation
 
-https://remoteok.com/api
+[https://remoteok.com/api](https://remoteok.com/api)
 
 ---
 
@@ -110,6 +110,27 @@ Open with Live Server
 The application will automatically open in your browser.
 
 ---
+## Method 2
+
+If you have Python installed
+
+```bash
+python -m http.server
+```
+
+or
+
+```bash
+python3 -m http.server
+```
+
+Open
+
+```
+http://localhost:8000
+```
+
+---
 
 # Deployment
 
@@ -160,7 +181,8 @@ sudo systemctl status nginx
 Visit
 
 ```
-http://<13.222.212.192>
+http://13.222.212.192  for web01
+http://44.201.158.84  for web02
 ```
 
 The application should now be accessible.
@@ -194,9 +216,9 @@ backend web_servers
 
     balance roundrobin
 
-    server web01 <web01-private-ip>:80 check
+    server web01 13.222.212.192:80 check
 
-    server web02 <web02-private-ip>:80 check
+    server web02 44.201.158.84:80 check
 ```
 
 The **roundrobin** balancing algorithm distributes incoming requests evenly between the two web servers.
@@ -213,6 +235,7 @@ The deployment was tested by:
 - Refreshing the application multiple times.
 - Confirming that requests were distributed between Web-01 and Web-02.
 - Verifying that the application continued to function correctly when served through the load balancer.
+http://3.87.193.206
 
 The application successfully returned job listings and all search functionality remained operational.
 
