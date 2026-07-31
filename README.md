@@ -83,17 +83,15 @@ Playing-Around-with-APIs/
 
 # Running the Project Locally
 
-## Method 1 (Recommended)
+## Method 1
 
 Clone the repository
 
-bash
 git clone https://github.com/xinz-ctr/Playing-Around-with-APIs.git
 
 
 Go into the project folder
 
-bash
 cd Playing-Around-with-APIs
 
 Open the project using VS Code.
@@ -113,12 +111,10 @@ The application will automatically open in your browser.
 
 If you have Python installed
 
-bash
 python -m http.server
 
 or
 
-bash
 python3 -m http.server
 
 Open
@@ -135,36 +131,30 @@ The application was deployed on Ubuntu web servers running Nginx.
 
 Clone the repository
 
-bash
 git clone https://github.com/xinz-ctr/Playing-Around-with-APIs.git
 
 ## Step 2
 
 Copy the project files
 
-bash
 sudo cp -r Playing-Around-with-APIs/* /var/www/html/
 
 ## Step 3
 
 Set permissions
 
-bash
 sudo chown -R www-data:www-data /var/www/html
 
-bash
 sudo chmod -R 755 /var/www/html
 
 ## Step 4
 
 Restart Nginx
 
-bash
 sudo systemctl restart nginx
 
 Verify
 
-bash
 sudo systemctl status nginx
 
 Visit
@@ -256,19 +246,6 @@ Creating a layout that worked well on desktop and mobile devices required severa
 Solution
 
 CSS Grid, Flexbox and media queries were used to create a responsive layout.
-
----
-
-# Future Improvements
-
-- Add advanced filtering
-- Save favorite jobs
-- Dark mode
-- Search suggestions
-- Bookmark jobs
-- Backend caching
-- User authentication
-- Search history
 
 ---
 
