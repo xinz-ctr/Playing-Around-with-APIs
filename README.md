@@ -2,6 +2,8 @@
 
 The website is live on a secure domain [ianchris.tech](https://www.ianchris.tech/)
 
+NOTE: I USED A PUBLIC API THAT DOES NOT REQUIRE AN API_KEY, HENCE WHY THERE IS NO API_KEY IN THIS README
+
 ## Project Overview
 
 JobFinder is a responsive web application that allows users to search for remote job opportunities from around the world. The application consumes data from the Remote OK API and provides a clean, user-friendly interface for browsing jobs by keyword. Users can also filter and sort the available positions to quickly find opportunities that match their interests.
