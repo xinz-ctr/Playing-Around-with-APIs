@@ -1,6 +1,4 @@
 const jobTitleInput = document.getElementById("jobTitle");
-const countryInput = document.getElementById("country");
-
 const searchBtn = document.getElementById("searchBtn");
 const clearBtn = document.getElementById("clearBtn");
 
@@ -9,8 +7,8 @@ const senioritySelect = document.getElementById("seniority");
 const sortSelect = document.getElementById("sortBy");
 
 const resultsContainer = document.getElementById("results");
-const loading = document.getElementById("loading");
 const resultCount = document.getElementById("resultCount");
+const loading = document.getElementById("loading");
 
 const prevPageBtn = document.getElementById("prevPage");
 const nextPageBtn = document.getElementById("nextPage");
@@ -23,22 +21,38 @@ let currentPage = 1;
 const jobsPerPage = 9;
 
 function showLoading() {
+
     loading.classList.remove("hidden");
+
 }
 
 function hideLoading() {
+
     loading.classList.add("hidden");
+
 }
 
-function stripHTML(html) {
+function cleanHTML(text) {
 
-    if (!html) return "";
+    if (!text) return "";
 
-    const temp = document.createElement("div");
+    const div = document.createElement("div");
 
-    temp.innerHTML = html;
+    div.innerHTML = text;
 
-    return temp.textContent || temp.innerText || "";
+    return div.textContent.replace(/\s+/g, " ").trim();
+
+}
+
+function shorten(text, length = 280) {
+
+    if (text.length <= length) {
+
+        return text;
+
+    }
+
+    return text.substring(0, length) + "...";
 
 }
 
@@ -51,24 +65,29 @@ function formatSalary(job) {
         job.salary_max === 0
     ) {
 
-        return "Salary Not Specified";
+        return "Salary not specified";
 
     }
 
-    return "$" +
-        job.salary_min.toLocaleString() +
-        " - $" +
-        job.salary_max.toLocaleString();
+    return `$${job.salary_min.toLocaleString()} - $${job.salary_max.toLocaleString()}`;
 
 }
 
 function formatDate(epoch) {
 
-    if (!epoch) return "Recently Posted";
+    if (!epoch) {
 
-    const date = new Date(epoch * 1000);
+        return "Recently";
 
-    return date.toLocaleDateString();
+    }
+
+    return new Date(epoch * 1000).toLocaleDateString(undefined, {
+
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+
+    });
 
 }
 
@@ -90,72 +109,63 @@ async function fetchJobs() {
 
         const data = await response.json();
 
-        jobs = data.filter(job => job.id);
+        jobs = data.filter(job => job.position);
 
-        searchJobs();
+        filteredJobs = [...jobs];
+
+        resultCount.textContent = `${jobs.length} Remote Jobs Found`;
+
+        displayJobs();
 
     }
 
     catch (error) {
 
-        console.error(error);
+        resultsContainer.innerHTML = `
 
-        resultsContainer.innerHTML =
+            <div class="message">
 
-        `
-        <div class="message">
+                <i class="fa-solid fa-circle-exclamation"></i>
 
-            <h2>Unable to load jobs.</h2>
+                <h2>Unable to load jobs</h2>
 
-            <p>Please try again later.</p>
+                <p>Please try again later.</p>
 
-        </div>
+            </div>
+
         `;
 
     }
 
-    finally {
-
-        hideLoading();
-
-    }
+    hideLoading();
 
 }
 
 function searchJobs() {
 
-    const keyword =
-        jobTitleInput.value.trim().toLowerCase();
-
-    const location =
-        countryInput.value.trim().toLowerCase();
+    const keyword = jobTitleInput.value
+        .trim()
+        .toLowerCase();
 
     filteredJobs = jobs.filter(job => {
 
-        const title =
-            (job.position || "").toLowerCase();
+        const title = (job.position || "").toLowerCase();
 
-        const company =
-            (job.company || "").toLowerCase();
+        const company = (job.company || "").toLowerCase();
 
-        const country =
-            (job.location || "").toLowerCase();
+        const tags = (job.tags || []).join(" ").toLowerCase();
 
-        const keywordMatch =
+        return (
 
             keyword === "" ||
 
             title.includes(keyword) ||
 
-            company.includes(keyword);
+            company.includes(keyword) ||
 
-        const locationMatch =
+            tags.includes(keyword)
 
-            location === "" ||
-
-            country.includes(location);
-
-        return keywordMatch && locationMatch;
+        );
 
     });
 
@@ -168,21 +178,17 @@ function applyFilters() {
 
     let results = [...filteredJobs];
 
-    const employment =
-        employmentTypeSelect.value.toLowerCase();
+    const employment = employmentTypeSelect.value.toLowerCase();
 
-    const seniority =
-        senioritySelect.value.toLowerCase();
+    const seniority = senioritySelect.value.toLowerCase();
 
     if (employment !== "") {
 
         results = results.filter(job => {
 
-            if (!job.tags) return false;
+            const tags = (job.tags || []).join(" ").toLowerCase();
 
-            return job.tags.some(tag =>
-                tag.toLowerCase().includes(employment)
-            );
+            return tags.includes(employment);
 
         });
 
@@ -192,11 +198,9 @@ function applyFilters() {
 
         results = results.filter(job => {
 
-            if (!job.tags) return false;
+            const tags = (job.tags || []).join(" ").toLowerCase();
 
-            return job.tags.some(tag =>
-                tag.toLowerCase().includes(seniority)
-            );
+            return tags.includes(seniority);
 
         });
 
@@ -220,13 +224,11 @@ function applyFilters() {
 
             break;
 
-        case "salary_low":
+        default:
 
             results.sort((a, b) =>
-                (a.salary_min || 0) - (b.salary_min || 0)
+                (b.epoch || 0) - (a.epoch || 0)
             );
-
-            break;
 
     }
 
@@ -240,166 +242,141 @@ function displayJobs() {
 
     resultsContainer.innerHTML = "";
 
-    resultCount.textContent =
-        `${filteredJobs.length} Jobs Found`;
+    resultCount.textContent = `${filteredJobs.length} Remote Jobs Found`;
 
     if (filteredJobs.length === 0) {
 
-        resultsContainer.innerHTML =
+        resultsContainer.innerHTML = `
 
-        `
-        <div class="message">
+            <div class="message">
 
-            <h2>No jobs found</h2>
+                <i class="fa-solid fa-magnifying-glass"></i>
 
-            <p>Try a different search.</p>
+                <h2>No jobs found</h2>
 
-        </div>
+                <p>Try another search or remove some filters.</p>
+
+            </div>
+
         `;
 
         pageNumber.textContent = "Page 1";
+
+        prevPageBtn.disabled = true;
+
+        nextPageBtn.disabled = true;
 
         return;
 
     }
 
-    const start =
-        (currentPage - 1) * jobsPerPage;
+    const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
-    const end =
-        start + jobsPerPage;
+    const start = (currentPage - 1) * jobsPerPage;
 
-    const pageJobs =
-        filteredJobs.slice(start, end);
+    const end = start + jobsPerPage;
+
+    const pageJobs = filteredJobs.slice(start, end);
 
     pageJobs.forEach(job => {
 
-        const logo =
+        const tags = (job.tags || [])
+            .slice(0, 5)
+            .map(tag => `<span>${tag}</span>`)
+            .join("");
 
-            job.company_logo && job.company_logo !== ""
-
-            ? job.company_logo
-
-            : "https://via.placeholder.com/70?text=Logo";
-
-        const tags =
-
-            job.tags && job.tags.length
-
-            ? job.tags.slice(0,5)
-
-            : [];
-
-        const description =
-
-            stripHTML(job.description)
-
-            .replace(/\s+/g," ")
-
-            .trim()
-
-            .substring(0,220) + "...";
-
-        const card = document.createElement("div");
+        const card = document.createElement("article");
 
         card.className = "job-card";
 
-        card.innerHTML =
+        card.innerHTML = `
 
-        `
-        <div class="job-header">
+            <div class="job-header">
 
-            <img src="${logo}" alt="${job.company}">
+                <h2>${job.position || "Untitled Position"}</h2>
 
-            <div>
+                <div class="company">
 
-                <h3>${job.position}</h3>
+                    ${job.company || "Unknown Company"}
 
-                <p class="company">
+                </div>
 
-                    ${job.company}
+            </div>
+
+            <div class="job-info">
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    ${job.location || "Worldwide"}
+
+                </p>
+
+                <p>
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    ${formatSalary(job)}
+
+                </p>
+
+                <p>
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    ${formatDate(job.epoch)}
 
                 </p>
 
             </div>
 
-        </div>
+            <div class="tags">
 
-        <div class="job-info">
+                ${tags}
 
-            <p>
+            </div>
 
-                <strong>Location:</strong>
+            <div class="job-description">
 
-                ${job.location || "Worldwide"}
+                ${shorten(cleanHTML(job.description))}
 
-            </p>
+            </div>
 
-            <p>
+            <div class="job-footer">
 
-                <strong>Salary:</strong>
+                <span class="posted-date">
 
-                ${formatSalary(job)}
+                    Posted ${formatDate(job.epoch)}
 
-            </p>
+                </span>
 
-            <p>
+                <a
+                    class="view-job"
+                    href="${job.apply_url || job.url}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
 
-                <strong>Posted:</strong>
+                    View Job
 
-                ${formatDate(job.epoch)}
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
-            </p>
+                </a>
 
-        </div>
+            </div>
 
-        <div class="job-tags">
-
-            ${tags.map(tag => `<span>${tag}</span>`).join("")}
-
-        </div>
-
-        <p class="job-description">
-
-            ${description}
-
-        </p>
-
-        <div class="job-footer">
-
-            <span>
-
-                ${job.company}
-
-            </span>
-
-            <a
-                href="${job.apply_url}"
-                target="_blank"
-            >
-
-                View Job
-
-            </a>
-
-        </div>
         `;
 
         resultsContainer.appendChild(card);
 
     });
 
-    const totalPages =
-        Math.ceil(filteredJobs.length / jobsPerPage);
+    pageNumber.textContent = `Page ${currentPage} of ${totalPages}`;
 
-    pageNumber.textContent =
-        `Page ${currentPage} of ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
 
-    prevPageBtn.disabled =
-        currentPage === 1;
-
-    nextPageBtn.disabled =
-        currentPage === totalPages;
+    nextPageBtn.disabled = currentPage === totalPages;
 
 }
 searchBtn.addEventListener("click", () => {
@@ -408,39 +385,9 @@ searchBtn.addEventListener("click", () => {
 
 });
 
-clearBtn.addEventListener("click", () => {
+jobTitleInput.addEventListener("keydown", event => {
 
-    jobTitleInput.value = "";
-
-    countryInput.value = "";
-
-    employmentTypeSelect.value = "";
-
-    senioritySelect.value = "";
-
-    sortSelect.value = "";
-
-    filteredJobs = [...jobs];
-
-    currentPage = 1;
-
-    displayJobs();
-
-});
-
-jobTitleInput.addEventListener("keypress", e => {
-
-    if (e.key === "Enter") {
-
-        searchJobs();
-
-    }
-
-});
-
-countryInput.addEventListener("keypress", e => {
-
-    if (e.key === "Enter") {
+    if (event.key === "Enter") {
 
         searchJobs();
 
@@ -472,60 +419,72 @@ sortSelect.addEventListener("change", () => {
 
 });
 
-nextPageBtn.addEventListener("click", () => {
+clearBtn.addEventListener("click", () => {
 
-    const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+    jobTitleInput.value = "";
 
-    if (currentPage < totalPages) {
+    employmentTypeSelect.value = "";
 
-        currentPage++;
+    senioritySelect.value = "";
 
-        displayJobs();
+    sortSelect.value = "newest";
 
-        window.scrollTo({
+    filteredJobs = [...jobs];
 
-            top: 250,
+    currentPage = 1;
 
-            behavior: "smooth"
-
-        });
-
-    }
+    displayJobs();
 
 });
 
 prevPageBtn.addEventListener("click", () => {
 
-    if (currentPage > 1) {
+    if (currentPage === 1) {
 
-        currentPage--;
-
-        displayJobs();
-
-        window.scrollTo({
-
-            top: 250,
-
-            behavior: "smooth"
-
-        });
+        return;
 
     }
+
+    currentPage--;
+
+    displayJobs();
+
+    window.scrollTo({
+
+        top: document.querySelector(".status").offsetTop - 20,
+
+        behavior: "smooth"
+
+    });
+
+});
+
+nextPageBtn.addEventListener("click", () => {
+
+    const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+
+    if (currentPage >= totalPages) {
+
+        return;
+
+    }
+
+    currentPage++;
+
+    displayJobs();
+
+    window.scrollTo({
+
+        top: document.querySelector(".status").offsetTop - 20,
+
+        behavior: "smooth"
+
+    });
 
 });
 
 window.addEventListener("load", () => {
 
     fetchJobs();
-
-});
-
-window.addEventListener("pageshow", () => {
-
-    if (jobs.length === 0) {
-
-        fetchJobs();
-
-    }
 
 });

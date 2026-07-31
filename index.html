@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobFinder | Find Remote Jobs</title>
+
+    <title>JobFinder | Remote Jobs</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    >
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -35,8 +39,8 @@
         <nav>
 
             <a href="#">Home</a>
+
             <a href="#results">Jobs</a>
-            <a href="#about">About</a>
 
         </nav>
 
@@ -44,50 +48,33 @@
 
 </header>
 
+
+
 <section class="hero">
 
     <div class="container">
 
-        <h1>Discover Your Next Remote Opportunity</h1>
+        <h1>Find Your Next Remote Job</h1>
 
         <p>
 
-            Search thousands of remote jobs from companies
-            around the world.
+            Search thousands of remote opportunities from companies around the world.
 
         </p>
 
         <div class="search-box">
 
-            <div class="input-group">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="jobTitle"
-                    placeholder="Job title or keyword"
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                <input
-                    type="text"
-                    id="country"
-                    placeholder="Country or location"
-                >
-
-            </div>
+            <input
+                type="text"
+                id="jobTitle"
+                placeholder="Search jobs, companies or technologies..."
+            >
 
             <button id="searchBtn">
 
-                <i class="fa-solid fa-search"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
 
-                Search
+                Search Jobs
 
             </button>
 
@@ -96,59 +83,64 @@
     </div>
 
 </section>
+
+
 
 <section class="controls">
 
     <div class="container controls-wrapper">
 
-        <div class="filters">
+        <select id="employmentType">
 
-            <select id="employmentType">
+            <option value="">Employment Type</option>
 
-                <option value="">Employment Type</option>
-                <option value="Full-Time">Full Time</option>
-                <option value="Part-Time">Part Time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelance">Freelance</option>
+            <option value="full">Full Time</option>
 
-            </select>
+            <option value="contract">Contract</option>
 
-            <select id="seniority">
+            <option value="freelance">Freelance</option>
 
-                <option value="">Experience</option>
-                <option value="Junior">Junior</option>
-                <option value="Mid">Mid Level</option>
-                <option value="Senior">Senior</option>
-                <option value="Lead">Lead</option>
+            <option value="part">Part Time</option>
 
-            </select>
+        </select>
 
-            <select id="sortBy">
+        <select id="seniority">
 
-                <option value="">Sort By</option>
-                <option value="company">Company</option>
-                <option value="salary_high">Highest Salary</option>
-                <option value="salary_low">Lowest Salary</option>
+            <option value="">Experience Level</option>
 
-            </select>
+            <option value="junior">Junior</option>
 
-        </div>
+            <option value="mid">Mid Level</option>
 
-        <div class="buttons">
+            <option value="senior">Senior</option>
 
-            <button id="clearBtn">
+            <option value="lead">Lead</option>
 
-                <i class="fa-solid fa-trash"></i>
+        </select>
 
-                Clear
+        <select id="sortBy">
 
-            </button>
+            <option value="newest">Newest</option>
 
-        </div>
+            <option value="company">Company A-Z</option>
+
+            <option value="salary_high">Highest Salary</option>
+
+        </select>
+
+        <button id="clearBtn">
+
+            <i class="fa-solid fa-rotate-left"></i>
+
+            Clear Filters
+
+        </button>
 
     </div>
 
 </section>
+
+
 
 <section class="status">
 
@@ -156,9 +148,9 @@
 
         <div id="loading" class="loading hidden">
 
-            <i class="fa-solid fa-spinner fa-spin"></i>
+            <div class="spinner"></div>
 
-            <span>Loading jobs...</span>
+            <p>Loading jobs...</p>
 
         </div>
 
@@ -168,16 +160,17 @@
 
 </section>
 
+
+
 <main class="container">
 
-    <section
-        id="results"
-        class="results"
-    >
+    <section id="results" class="results">
 
     </section>
 
 </main>
+
+
 
 <section class="pagination">
 
@@ -205,41 +198,25 @@
 
 </section>
 
-<section id="about" class="about">
 
-    <div class="container">
-
-        <h2>About JobFinder</h2>
-
-        <p>
-
-            JobFinder helps job seekers discover remote
-            opportunities from companies worldwide using
-            the Remote OK Jobs API. Search by keyword,
-            filter results, sort listings and browse
-            opportunities in a clean, responsive interface.
-
-        </p>
-
-    </div>
-
-</section>
 
 <footer>
 
-    <div class="container">
+    <div class="container footer-content">
+
+        <h3>JobFinder</h3>
 
         <p>
 
-            © 2026 JobFinder
+            Discover remote opportunities from companies worldwide.
 
         </p>
 
-        <p>
+        <small>
 
-            Powered by Remote OK API
+            Powered by the Remote OK API
 
-        </p>
+        </small>
 
     </div>
 
@@ -248,4 +225,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
